@@ -1,0 +1,22 @@
+# version: '3.8'
+
+services:
+  # Service Apache & PHP 7.4 keur Cccinfo
+  web:
+    image: php:7.4-apache
+    container_name: php74_cccinfo
+    entrypoint: sh -c "a2enmod rewrite && docker-php-ext-install mysqli && apache2-foreground"
+    ports:
+      - "8081:80"
+    volumes:
+      - .:/var/www/html
+    restart: always
+    networks:
+      - default
+      - db_hub # <== Wajib asup dieu sangkan bisa nembak database logsheet
+
+# Volumes dihapus sabab database geus pindah ka imah sabelah
+
+networks:
+  db_hub:
+    external: true
