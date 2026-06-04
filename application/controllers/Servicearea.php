@@ -234,7 +234,7 @@ class Servicearea extends CI_Controller {
 			$this->load->view('templates/header', $data);
 			$this->load->view('templates/navbar', $data);
 			$this->load->view('templates/sidebar', $data);
-			$this->load->view('servicearea/edit-area-new', $data);
+			$this->load->view('servicearea/edit-area-multi', $data);
 			$this->load->view('templates/footer', $data);
 		} else {
 			$updateData = [
@@ -324,10 +324,10 @@ class Servicearea extends CI_Controller {
 			$updateData = [
 				'id' => $this->input->post('editServiceareaId'),
 				'address' => $this->input->post('editServiceareaAddress'),
-				'subdistrict' => $this->input->post('editServiceareaSubdistrict'),
-				'district' => $this->input->post('editServiceareaDistrict'),
-				'city' => $this->input->post('editServiceareaCity'),
-				'province' => $this->input->post('editServiceareaProvince'),
+				'subdistrict' => strtoupper($this->input->post('editServiceareaSubdistrict')),
+				'district' => strtoupper($this->input->post('editServiceareaDistrict')),
+				'city' => strtoupper($this->input->post('editServiceareaCity')),
+				'province' => strtoupper($this->input->post('editServiceareaProvince')),
 				'postal_code' => $this->input->post('editServiceareaPostalcode'),
 				'under_svc' => $this->input->post('editServiceareaUnderservice'),
 				'notif_type' => $this->input->post('editServiceareaNotiftype'),

@@ -3,20 +3,20 @@
 services:
   # Service Apache & PHP 7.4 keur Cccinfo
   web:
-    image: php:7.4-apache
+    build: .
     container_name: php74_cccinfo
-    entrypoint: sh -c "a2enmod rewrite && docker-php-ext-install mysqli && apache2-foreground"
+    user: "1000:1000" # Nyingkahan error permission di Pop!_OS
     ports:
-      - "8081:80"
+      - "8081:80" # Port luar 8081, moal tabrakan jeung Logsheet (8080)
     volumes:
       - .:/var/www/html
     restart: always
     networks:
       - default
-      - db_hub # <== Wajib asup dieu sangkan bisa nembak database logsheet
+      - db_hub # Nyambung ka jaringan luar tempat DB Logsheet aya
 
-# Volumes dihapus sabab database geus pindah ka imah sabelah
+# Volumes dihapus sabab database geus pindah ka imah sabelah (Project 1)
 
 networks:
   db_hub:
-    external: true
+    external: true # Ngilu kana network external nu geus dijieun ku Project 1
