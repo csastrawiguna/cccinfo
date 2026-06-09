@@ -1436,21 +1436,21 @@ $(function () {
 		placeholder: 'Pilih atau input baru'
 	});
 
-	// 
-	// $("#complaintSummarySelectRegion").on("click", function () {
-	// 	var regional = $(this).val();
-	// 	// alert(regional);
-	// 	$.ajax({
-	// 		url: baseUrl + 'complaint/branchListByRegional',
-	// 		data: { regional: regional },
-	// 		method: "post",
-	// 		dataType: "html",
-	// 		success: function (data) {
-	// 			$("#complaintSummarySelectBranch").html('');
-	// 			$("#complaintSummarySelectBranch").append(data);
-	// 		}
-	// 	});
-	// });
+	
+	$("#complaintSummarySelectRegion").on("click", function () {
+		var regional = $(this).val();
+		// alert(regional);
+		$.ajax({
+			url: baseUrl + 'complaint/branchListByRegional',
+			data: { regional: regional },
+			method: "post",
+			dataType: "html",
+			success: function (data) {
+				$("#complaintSummarySelectBranch").html('');
+				$("#complaintSummarySelectBranch").append(data);
+			}
+		});
+	});
 
 	// general style for Datatable
 	$(".tableDatatableFullOption").DataTable();
