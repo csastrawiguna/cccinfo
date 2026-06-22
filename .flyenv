@@ -1,2 +1,0 @@
-#!/bin/zsh
-export PATH="/home/linuxbrew/.linuxbrew/Cellar/php@7.4/7.4.33_13:/home/linuxbrew/.linuxbrew/Cellar/php@7.4/7.4.33_13/bin:/home/linuxbrew/.linuxbrew/Cellar/php@7.4/7.4.33_13/sbin:$PATH" #FlyEnv-ID-RZTLbjzBm0SYoNxOgU7Fuf45MpWxzak0
