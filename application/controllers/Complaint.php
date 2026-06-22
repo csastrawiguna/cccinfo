@@ -18,7 +18,7 @@ class Complaint extends CI_Controller
         is_login();
     }
 
-    public function summary()
+    public function index()
     {
         check_access();
         $this->_autoDismissUpdateList();
@@ -29,7 +29,7 @@ class Complaint extends CI_Controller
         $this->load->view('templates/header', $data);
         $this->load->view('templates/navbar', $data);
         $this->load->view('templates/sidebar', $data);
-        $this->load->view('complaint/trial-new-complaint-summary', $data);
+        $this->load->view('complaint/complaint-new-summary', $data);
         $this->load->view('templates/footer', $data);
     }
 
@@ -107,7 +107,7 @@ class Complaint extends CI_Controller
             ->set_output(json_encode($response));
     }
 
-    public function index()
+    public function summary()
     {
         check_access();
         $this->_autoDismissUpdateList();

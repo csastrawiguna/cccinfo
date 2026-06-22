@@ -109,5 +109,18 @@
 </script>
 <script src="<?= base_url('assets/js/functions.js?v=' . filemtime(FCPATH . 'assets/js/functions.js')) ?>"></script>
 
+<?php if (isset($vuescript) && !empty($vuescript)): ?>
+    <?php 
+        // Gabungkeun path jeung ekstensi .js
+        $js_file = $vuescript . '.js'; 
+        $full_path = FCPATH . 'assets/js/vue3/' . $js_file;
+    ?>
+    
+    <?php if (file_exists($full_path)): ?>
+        <script src="<?= base_url('assets/js/vue3/' . $js_file . '?v=' . filemtime($full_path)) ?>"></script>
+    <?php else: ?>
+    <?php endif; ?>
+<?php endif; ?>
+
 </body>
 </html>
