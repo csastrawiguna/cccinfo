@@ -1,20 +1,84 @@
 <div class="content-wrapper" id="app" data-url="<?= base_url() ?>">
     <div class="container-fluid pt-2">
         <div class="flashmessage" style="display: none;"><?= $this->session->flashdata('message'); ?></div>
-        <div v-if="loading" class="text-center p-5">
-            <div class="spinner-border text-info"></div>
-            <p>Keur narik data, sakedap...</p>
+        <!-- Efek Skeleton Loading pas keur loading data -->
+        <div v-if="loading" class="card card-outline card-info skeleton-wrapper">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div class="skeleton skeleton-text header-title"></div>
+                <div class="skeleton skeleton-text header-badge"></div>
+            </div>
+            
+            <div class="card-body">
+                <!-- Skeleton Form Filter -->
+                <div class="row bg-light p-3 mb-4 rounded">
+                    <div class="col-md-2" v-for="i in 5" :key="'filt-'+i">
+                        <div class="skeleton skeleton-text label-skeleton"></div>
+                        <div class="skeleton skeleton-input"></div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="skeleton skeleton-text label-skeleton"></div>
+                        <div class="skeleton skeleton-btn"></div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <!-- Skeleton Tabel Summary -->
+                <div class="table-responsive">
+                    <div class="skeleton skeleton-text table-badge mb-3"></div>
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr>
+                                <th v-for="i in 5" :key="'th-'+i">
+                                    <div class="skeleton skeleton-text m-auto" style="width: 60px;"></div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="row in 6" :key="'tr-'+row">
+                                <td><div class="skeleton skeleton-text" style="width: 80px;"></div></td>
+                                <td><div class="skeleton skeleton-text ms-auto" style="width: 50px;"></div></td>
+                                <td><div class="skeleton skeleton-text ms-auto" style="width: 50px;"></div></td>
+                                <td><div class="skeleton skeleton-text ms-auto" style="width: 50px;"></div></td>
+                                <td><div class="skeleton skeleton-text ms-auto" style="width: 60px; font-weight:bold;"></div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="table-responsive mt-5">
+                    <div class="skeleton skeleton-text table-badge mb-3"></div>
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr>
+                                <th v-for="i in 5" :key="'th-'+i">
+                                    <div class="skeleton skeleton-text m-auto" style="width: 60px;"></div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="row in 8" :key="'tr-'+row">
+                                <td><div class="skeleton skeleton-text" style="width: 80px;"></div></td>
+                                <td><div class="skeleton skeleton-text ms-auto" style="width: 50px;"></div></td>
+                                <td><div class="skeleton skeleton-text ms-auto" style="width: 50px;"></div></td>
+                                <td><div class="skeleton skeleton-text ms-auto" style="width: 50px;"></div></td>
+                                <td><div class="skeleton skeleton-text ms-auto" style="width: 60px; font-weight:bold;"></div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
         <div v-else v-cloak class="card card-outline card-info">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <span class="h6 text-info">Summary Keluhan Konsumen (Vue 3)</span>
+                <span class="h6 text-info">Summary Keluhan Konsumen</span>
                 <div v-if="loadingData" class="spinner-border spinner-border-sm text-info"></div>
             </div>
             
             <div class="card-body">
                 <!-- Form Parameter -->
-                <div class="row bg-light">
+                <div class="row rounded mb-4 px-3 py-2" style="background-color: rgba(240, 245, 245, 0.8);">
                     <div class="col-md-2">
                         <label>Periode Awal</label>
                         <input type="date" v-model="filters.start" class="form-control">
@@ -77,8 +141,6 @@
                     </div>
                 </div>
 
-                <hr>
-
                 <!-- Table #1. Monthly Transition -->
                 <div class="table-responsive">
                     <h6 class="badge badge-info badge-pill px-2">Transition</h6>
@@ -117,44 +179,6 @@
                                 </td>
                                 <td class="text-right text-primary">
                                     {{ formatNumber(byMonths[0].status_total) }}
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-
-                <!-- Table #2. CCC Send on Same Days -->
-                <div class="table-responsive">
-                    <h6 class="badge badge-info badge-pill px-2">Rasio Same Day Forward </h6>
-                    <table class="table table-sm table-hover table-bordered table-responsive">
-                        <thead class="bg-light text-center">
-                            <tr>
-                                <th style="min-width: 160px;">Deskripsi</th>
-                                <th v-for="head in reports.tableHeader" :key="head">
-                                    {{ formatDateHeader(head) }}
-                                </th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(row, index) in monthlyOnSameday.slice(0, 2)" :key="index">
-                                <td>{{ row.status }}</td>
-                                <td v-for="head in reports.tableHeader" :key="head" class="text-right px-4">
-                                    {{ formatNumber(row[head]) }}
-                                </td>
-                                <td class="text-right font-weight-bold px-4">
-                                    {{ formatNumber(row.status_total) }}
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tfoot v-if="monthlyOnSameday.length > 0">
-                            <tr class="bg-light font-weight-bold">
-                                <td>{{ monthlyOnSameday[2].status }}</td>
-                                <td v-for="head in reports.tableHeader" :key="head" class="text-right px-4 text-primary">
-                                    {{ monthlyOnSameday[2][head] }}
-                                </td>
-                                <td class="text-right px-4 text-primary">
-                                    {{ monthlyOnSameday[2].status_total }}
                                 </td>
                             </tr>
                         </tfoot>
@@ -407,6 +431,44 @@
                                 <td class="text-end">{{ formatNumber(overallTotals.grandTotal) }}</td>
                             </tr>
                         </tbody>
+                    </table>
+                </div>
+
+                <!-- Table #2. CCC Send on Same Days -->
+                <div class="table-responsive">
+                    <h6 class="badge badge-info badge-pill px-2">Rasio Same Day Forward </h6>
+                    <table class="table table-sm table-hover table-bordered table-responsive">
+                        <thead class="bg-light text-center">
+                            <tr>
+                                <th style="min-width: 160px;">Deskripsi</th>
+                                <th v-for="head in reports.tableHeader" :key="head">
+                                    {{ formatDateHeader(head) }}
+                                </th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(row, index) in monthlyOnSameday.slice(0, 2)" :key="index">
+                                <td>{{ row.status }}</td>
+                                <td v-for="head in reports.tableHeader" :key="head" class="text-right px-4">
+                                    {{ formatNumber(row[head]) }}
+                                </td>
+                                <td class="text-right font-weight-bold px-4">
+                                    {{ formatNumber(row.status_total) }}
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot v-if="monthlyOnSameday.length > 0">
+                            <tr class="bg-light font-weight-bold">
+                                <td>{{ monthlyOnSameday[2].status }}</td>
+                                <td v-for="head in reports.tableHeader" :key="head" class="text-right px-4 text-primary">
+                                    {{ monthlyOnSameday[2][head] }}
+                                </td>
+                                <td class="text-right px-4 text-primary">
+                                    {{ monthlyOnSameday[2].status_total }}
+                                </td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

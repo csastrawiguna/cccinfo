@@ -67,6 +67,7 @@
             border: 1px solid #999;
             font-size: 13px;
         }
+        
         .preloader {
           position: fixed;
           top: 0;
@@ -126,6 +127,71 @@
         .tooltips:hover .tooltiptext {
           visibility: visible;
           opacity: 1;
+        }
+
+        /* Teu nembongan {{ }} pas refresh */
+        [v-cloak] { display: none; }
+
+        /* --- Base Skeleton & Wave Effect (Waved Silk) --- */
+        .skeleton {
+            position: relative;
+            overflow: hidden;
+            background-color: #eaedf1;
+        }
+
+        /* Ieu rahasia efek sutra ngalambak jiga YouTube (Shimmer Effect) */
+        .skeleton::after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            transform: translateX(-100%);
+            background-image: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.6) 20%,
+                rgba(255, 255, 255, 0.9) 60%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            animation: shimmer 1.6s infinite;
+            content: '';
+        }
+
+        @keyframes shimmer {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* --- Ukuran jeung Wangun Element Skeleton --- */
+        .skeleton-text {
+            height: 14px;
+            margin-bottom: 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .skeleton-input {
+            height: 38px;
+            border-radius: 4px;
+            width: 100%;
+        }
+        
+        .skeleton-btn {
+            height: 38px;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        /* Custom sizing keur filter & header */
+        .header-title { width: 250px; height: 20px; }
+        .header-badge { width: 30px; height: 30px; border-radius: 50%; }
+        .label-skeleton { width: 70px; height: 12px; }
+        .table-badge { width: 90px; height: 22px; border-radius: 50px; }
+        
+        /* Supados alignment skeleton di tabel pas di katuhu (keur angka) */
+        .ms-auto {
+            margin-left: auto;
         }
     </style>
 

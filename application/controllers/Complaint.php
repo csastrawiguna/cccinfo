@@ -23,7 +23,7 @@ class Complaint extends CI_Controller
         check_access();
         $this->_autoDismissUpdateList();
 
-        $data['title'] = 'Coba CI3 view make Vue 3';
+        $data['title'] = 'Complaint Summary New';
         $data['vuescript'] = 'complaint/complaint_summary';
 
         $this->load->view('templates/header', $data);
